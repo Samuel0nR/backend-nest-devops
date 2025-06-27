@@ -8,16 +8,6 @@ pipeline {
         registryCredentials = "gcp-registry"
     }
     stages{
-        stage ("saludo a usuario") {
-            steps {
-                sh 'echo "comenzado mi pipeline"'
-            }
-        }
-        stage ("salida de los saludos a usuario") {
-            steps {
-                sh 'echo "saliendo de este grupo de escenarios"'
-            }
-        }
         stage ("proceso de build y test") {
             agent {
                 docker {
@@ -47,9 +37,9 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry("${registry}", registryCredentials ){
-                        sh "docker build -t backend-nest-cmd ."
-                        sh "docker tag backend-nest-cmd ${dockerImagePrefix}/backend-nest-cmd"
-                        sh "docker push ${dockerImagePrefix}/backend-nest-cmd"
+                        sh "docker build -t backend-nest-sr ."
+                        sh "docker tag backend-nest-sr ${dockerImagePrefix}/backend-nest-sr"
+                        sh "docker push ${dockerImagePrefix}/backend-nest-sr"
                     }
                 }
             }
